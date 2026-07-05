@@ -1,4 +1,3 @@
-````md
 # Library Inventory Manager V3
 
 A modern C++ console application for managing a library inventory.
