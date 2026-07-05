@@ -1,16 +1,16 @@
-# 📚 Library Inventory Manager V3
+# Library Inventory Manager V3
 
 A modern C++ console application for managing a library inventory.
 
 This project is a complete redesign of my previous Library V2 project with a stronger focus on object-oriented programming, clean architecture, and modern C++ practices. Instead of writing everything in a single source file, the application is built using multiple classes, separated responsibilities, and reusable components.
 
-> **Project Status:** 🚧 In Development
+> **Project Status:** In Development
 
 ---
 
 ## Features
 
-### ✅ Implemented
+### Implemented
 
 - Object-oriented `Book` class
 - Object-oriented `Library` class
@@ -19,7 +19,7 @@ This project is a complete redesign of my previous Library V2 project with a str
 - Constructor initialization using initializer lists
 - Dynamic book storage using `std::vector`
 
-### 🚧 In Progress
+### In Progress
 
 - Display individual books
 - Display all books
@@ -27,7 +27,7 @@ This project is a complete redesign of my previous Library V2 project with a str
 - Search books
 - Edit book information
 
-### 📌 Planned
+### Planned
 
 - File saving and loading
 - Input validation
