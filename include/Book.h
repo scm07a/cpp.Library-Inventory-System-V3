@@ -9,7 +9,8 @@ class Book{
         int quantity;
     public:
         std::string getTitle();
-        Book(std::string title,
+        Book(int id,
+            std::string title,
             std::string author,
             double price,
             int quantity);

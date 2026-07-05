@@ -5,10 +5,12 @@ std::string Book::getTitle(){
 }
 
 Book::Book(
+            int id,
             std::string title,
             std::string author,
             double price,
             int quantity):
+                id(id),
                 title(title),
                 author(author),
                 price(price),
