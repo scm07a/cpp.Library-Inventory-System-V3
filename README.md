@@ -1,10 +1,11 @@
+````md
 # Library Inventory Manager V3
 
 A modern C++ console application for managing a library inventory.
 
 This project is a complete redesign of my previous Library V2 project with a stronger focus on object-oriented programming, clean architecture, and modern C++ practices. Instead of writing everything in a single source file, the application is built using multiple classes, separated responsibilities, and reusable components.
 
-> **Project Status:** In Development
+> **Status:** Active Development
 
 ---
 
@@ -40,6 +41,7 @@ This project is a complete redesign of my previous Library V2 project with a str
 ## Technologies Used
 
 - C++23
+- CMake
 - Object-Oriented Programming (OOP)
 - Standard Template Library (STL)
   - `std::vector`
@@ -61,52 +63,65 @@ Library-V3/
 │   ├── Library.cpp
 │   └── main.cpp
 │
+├── CMakeLists.txt
+│
 └── README.md
-```
+````
 
 ---
 
-## Goals
+## Learning Objectives
 
-This project is helping me strengthen my understanding of:
+This project is part of my C++ learning journey and focuses on applying software engineering principles while building a complete application.
 
-- Classes and Objects
-- Constructors
-- Initializer Lists
-- Encapsulation
-- Composition
-- Separation of Responsibilities
-- Working with Multiple Source Files
-- STL Containers
-- Writing maintainable C++ code
+Concepts practiced include:
+
+* Classes and Objects
+* Constructors
+* Initializer Lists
+* Encapsulation
+* Composition
+* Separation of Responsibilities
+* Multi-file Project Organization
+* STL Containers
+* Modern C++ Design
 
 ---
 
 ## Future Improvements
 
-- Persistent data storage
-- Better search algorithms
-- Sorting books
-- Borrowing and returning books
-- Statistics dashboard
-- Optional graphical interface using SDL2/OpenGL in the future
+* Persistent data storage
+* Better search algorithms
+* Sorting books
+* Borrowing and returning books
+* Statistics dashboard
+* Optional graphical interface using SDL2/OpenGL
 
 ---
 
 ## Build
 
-Compile the project using a C++23 compatible compiler.
+This project uses CMake.
 
-Example:
+### Requirements
+
+* CMake 3.20 or newer
+* A C++23 compatible compiler
+
+### Build Instructions
 
 ```bash
-g++ src/*.cpp -Iinclude -std=c++23 -o LibraryV3
+mkdir build
+cd build
+cmake ..
+cmake --build .
 ```
 
 ---
 
 ## Author
 
-Developed by **Mohamed Mourad** as part of my journey toward becoming a Software Engineer.
+Developed by Mohamed Mourad as part of my journey toward becoming a Software Engineer.
 
-Feedback and suggestions are always welcome!
+```
+```
