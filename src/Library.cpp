@@ -1,4 +1,6 @@
 #include <iostream>
+
+#include "Book.h"
 #include "Library.h"
 
 Library::Library():nextID(1){}
@@ -23,4 +25,16 @@ void Library::addBook(){
     Book newBook=Book(nextID,title,author,price,quantity);
     books.push_back(newBook);
     nextID++;
+}
+
+int Library::maxNoBooks(){
+    int count=0;
+    for (size_t i=0;i<books.size();i++)
+        count++;
+    return count;
+}
+
+void Library::searchBook(){
+    std::cout<<"No. Of Books: " <<maxNoBooks() <<std::endl;
+    
 }
