@@ -27,14 +27,7 @@ void Library::addBook(){
     nextID++;
 }
 
-int Library::maxNoBooks(){
-    int count=0;
-    for (size_t i=0;i<books.size();i++)
-        count++;
-    return count;
-}
-
 void Library::searchBook(){
-    std::cout<<"No. Of Books: " <<maxNoBooks() <<std::endl;
-    
+    std::cout<<"No. Of Books: " <<books.size() <<std::endl;
+
 }

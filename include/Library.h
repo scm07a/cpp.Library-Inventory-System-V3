@@ -9,7 +9,6 @@ class Library{
     public:
         Library();
         void addBook();
-        int maxNoBooks();
         void searchBook();
         void displayAllBooks();
         void removeBook();
