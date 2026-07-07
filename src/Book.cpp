@@ -17,10 +17,11 @@ Book::Book(
                 price(price),
                 quantity(quantity){}
 
-void Book::printBook(){
+void Book::printBook() const{
+    std::cout<<'\n';
     std::cout<<"ID:# "<<id <<std::endl;
     std::cout<<"Title:"<<title <<std::endl;
     std::cout<<"Author:"<<author <<std::endl;
     std::cout<<"Price:"<<price <<std::endl;
-    std::cout<<"Quantity:"<<quantity <<std::endl;
+    std::cout<<"Quantity:"<<quantity <<std::endl <<'\n';
 }

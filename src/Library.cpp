@@ -31,3 +31,8 @@ void Library::searchBook(){
     std::cout<<"No. Of Books: " <<books.size() <<std::endl;
 
 }
+
+void Library::displayAllBooks(){
+    for (const Book &book: books)
+        book.printBook();
+}
