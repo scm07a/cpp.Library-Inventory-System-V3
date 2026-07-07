@@ -12,4 +12,7 @@ class Library{
         void searchBook();
         void displayAllBooks();
         void removeBook();
+        void fAsending();
+        void fDescending();
+        void available();
 };

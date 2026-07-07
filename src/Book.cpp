@@ -23,5 +23,7 @@ void Book::printBook() const{
     std::cout<<"Title:"<<title <<std::endl;
     std::cout<<"Author:"<<author <<std::endl;
     std::cout<<"Price:"<<price <<std::endl;
-    std::cout<<"Quantity:"<<quantity <<std::endl <<'\n';
+    std::cout<<"Quantity:"<<quantity <<std::endl;
+    std::cout<<"\n=====================================\n"
+            <<std::endl;
 }
