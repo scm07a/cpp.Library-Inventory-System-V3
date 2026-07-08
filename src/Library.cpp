@@ -37,7 +37,7 @@ void Library::displayAllBooks(){
                 <<std::endl;
         std::cout<<"3. Sort By ID ↓.         4. Sort By Price ↓."
                 <<std::endl;
-        std::cout<<"         5.Return To Main Menu. "
+        std::cout<<"          5.Return To Main Menu. "
                 <<std::endl;
 
         std::cout<<"Choice: ";
@@ -48,7 +48,10 @@ void Library::displayAllBooks(){
             case 3: fDescendingID(); break;
             case 4: fDescendingPrice(); break;
             case 5: return;
-            default: printErr(); break;
+            default:
+                printErr(); 
+                Sleep(1000);
+                break;
         }
     }
     

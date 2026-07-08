@@ -1,10 +1,11 @@
 #include <iostream>
+#include <windows.h>
 #include "Library.h"
 #include "Book.h"
-#include "FileHandlers.h"
 #include "Utils.h"
 
 int main(){
+        SetConsoleOutputCP(CP_UTF8);
         int choice;
         Library library;
 
@@ -39,18 +40,23 @@ int main(){
                                 break;
                         case 3:
                                 comingSoon();
+                                Sleep(1000);
                                 break;
                         case 4:
                                 comingSoon();
+                                Sleep(1000);
                                 break;
                         case 5:
                                 comingSoon();
+                                Sleep(1000);
                                 break;
                         case 6:
                                 comingSoon();
+                                Sleep(1000);
                                 break;
                         default:
                                 printErr();
+                                Sleep(1000);
                                 break;
                 }
         }
