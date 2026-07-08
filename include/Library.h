@@ -9,10 +9,20 @@ class Library{
     public:
         Library();
         void addBook();
-        void searchBook();
+
         void displayAllBooks();
-        void removeBook();
-        void fAsending();
-        void fDescending();
+        void fAscendingID();
+        void fAscendingPrice();
+        void fDescendingID();
+        void fDescendingPrice();
+
+        void stats();
+
+        void searchBook();
         void available();
+        void removeBook();
+
+        void saveData();
+        void loadData();
+        void resetData();
 };

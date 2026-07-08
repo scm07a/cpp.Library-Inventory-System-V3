@@ -1,8 +1,20 @@
 #include "Book.h"
 #include <iostream>
 
-std::string Book::getTitle(){
+int Book::getID() const{
+    return id;
+}
+std::string Book::getTitle() const{
     return title;
+}
+std::string Book::getAuthor() const{
+    return author;
+}
+double Book::getPrice() const{
+    return price;
+}
+int Book::getQuantity() const{
+    return quantity;
 }
 
 Book::Book(

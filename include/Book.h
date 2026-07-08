@@ -8,7 +8,11 @@ class Book{
         double price;
         int quantity;
     public:
-        std::string getTitle();//*For Sorting And Searching
+        int getID() const;
+        std::string getTitle() const;//*For Sorting And Searching
+        std::string getAuthor() const;
+        double getPrice() const;
+        int getQuantity() const;
         Book(int id,
             std::string& title,
             std::string& author,

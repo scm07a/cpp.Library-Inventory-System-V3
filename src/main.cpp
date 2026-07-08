@@ -6,10 +6,9 @@
 
 int main(){
         int choice;
-        bool isRunning = true;
         Library library;
 
-        while(isRunning){
+        while(true){
                 std::cout<<"============================================="
                         <<std::endl;
                 std::cout<<"        Library Inventory System V3"
@@ -18,11 +17,11 @@ int main(){
                         <<std::endl;
                 std::cout<<"                 0.Exit"        
                         <<std::endl;
-                std::cout<<"1.Add New Book.          2.Display All Books."
+                std::cout<<"1. Add New Book.          2. Display All Books."
                         <<std::endl;
-                std::cout<<"3.Search Books.          4.Statistics."
+                std::cout<<"3. Search Books.          4. Statistics."
                         <<std::endl;
-                std::cout<<"5.Save Data.             6.Reset Data."
+                std::cout<<"5. Save Data.             6. Reset Data."
                         <<std::endl;
 
                 std::cout<<"Choice:";
@@ -30,8 +29,8 @@ int main(){
                 std::cin.ignore();
                 switch(choice){
                         case 0:
-                                isRunning = false;
-                                break;
+                                if (exitMenu())
+                                        break;
                         case 1:
                                 library.addBook();
                                 break;
