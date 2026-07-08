@@ -18,8 +18,11 @@ class Library{
 
         void stats();
 
-        void searchBook();
-        void available();
+        void searchBookMenu();
+        void searchID();
+        void searchTitle();
+        void searchAuthor();
+        int available();
         void removeBook();
 
         void saveData();

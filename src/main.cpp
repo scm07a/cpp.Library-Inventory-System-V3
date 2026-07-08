@@ -7,7 +7,7 @@
 int main(){
         SetConsoleOutputCP(CP_UTF8);
         int choice;
-        Library library;
+        Library lib;
 
         while(true){
                 std::cout<<"============================================="
@@ -30,13 +30,15 @@ int main(){
                 std::cin.ignore();
                 switch(choice){
                         case 0:
-                                if (exitMenu())
+                                if (exitMenu()){
+                                        lib.saveData();
                                         break;
+                                }
                         case 1:
-                                library.addBook();
+                                lib.addBook();
                                 break;
                         case 2:
-                                library.displayAllBooks();
+                                lib.displayAllBooks();
                                 break;
                         case 3:
                                 comingSoon();
@@ -47,7 +49,7 @@ int main(){
                                 Sleep(1000);
                                 break;
                         case 5:
-                                comingSoon();
+                                lib.saveData();
                                 Sleep(1000);
                                 break;
                         case 6:

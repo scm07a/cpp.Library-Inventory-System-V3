@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <windows.h>
 #include "Book.h"
 #include "Library.h"
 #include "Utils.h"
@@ -143,4 +144,33 @@ void Library::resetData(){
     }
     file.clear();
     file.close();
+}
+
+void Library::searchBookMenu(){
+    int choice;
+    std::cout<<"================="<<std::endl;
+    std::cout<<"Search For A Book"<<std::endl;
+    std::cout<<"================="<<std::endl;
+    std::cout<<"Search By:-"<<std::endl;
+    std::cout<<"1. ID. 2. Title. 3.Author."<<std::endl;
+    std::cin>>choice;
+    switch(choice){
+        case 1:
+            searchID();
+            break;
+        case 2:
+            searchTitle();
+            break;
+        case 3:
+            searchAuthor();
+            break;
+        default:
+            printErr();
+            break;
+    }
+}
+
+void Library::searchID(){
+    int IDChoice;
+    std::cout<<"";
 }
