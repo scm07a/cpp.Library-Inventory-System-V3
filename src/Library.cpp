@@ -110,7 +110,57 @@ void Library::fDescendingPrice(){
         book.printBook();
 }
 
-void Library::stats(){}
+void Library::stats(){
+    if (books.empty()){
+    std::cout<<"The Library Is Empty..."<<std::endl;
+    Sleep(1000);
+    return;
+    }
+
+    int totalBooks=books.size(),
+            totalCopies=0,
+            availableCopies=0;
+    std::string expensiveTitle, cheapTitle;
+    double invValue=0, expensivePrice=-999, cheapPrice=999, avgPrice=0;
+    for(const Book& book:books){
+        //* Calculates Total Copies
+        totalCopies+=book.getQuantity();
+        //* Calculates Total Available Copies
+        if(book.getQuantity()>0)
+            availableCopies+=book.getQuantity();
+        //* Calculates Inventory Value
+        invValue+=book.getPrice()*book.getQuantity();
+        //* Sums All Book Prices In Loop
+        avgPrice+=book.getPrice();
+        //* Expensive Book Search
+        if(book.getPrice()>expensivePrice){
+            expensivePrice=book.getPrice();
+            expensiveTitle=book.getTitle();
+        }
+        //* Cheap Book Search
+        if(book.getPrice()<cheapPrice){
+            cheapPrice=book.getPrice();
+            cheapTitle=book.getTitle();
+        }
+    }
+    //* Divides By Total Books To Get Average
+    avgPrice/=totalBooks;
+
+    //* Stats Menu
+
+    std::cout<<"============" <<std::endl;
+    std::cout<<" Statistics" <<std::endl;
+    std::cout<<"============" <<std::endl <<'\n';
+    std::cout<<"Total Books: "<<totalBooks <<std::endl;
+    std::cout<<"Total Copies: "<<totalCopies <<std::endl;
+    std::cout<<"Total Available Copies: "<<availableCopies <<std::endl <<'\n';
+    std::cout<<"Inventory Value: $"<<invValue <<std::endl <<'\n';
+    std::cout<<"The Most Expensive Book: "<<expensiveTitle <<" ($"
+                <<expensivePrice <<")"<<std::endl;
+    std::cout<<"The Cheapest Book: "<<cheapTitle <<" ($"
+                <<cheapPrice <<")"<<std::endl <<'\n';
+    std::cout<<"Average Book Price: $" <<avgPrice <<std::endl <<'\n';
+}
 
 void Library::searchBookMenu(){
     int choice;

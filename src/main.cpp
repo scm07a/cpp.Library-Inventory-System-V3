@@ -46,7 +46,7 @@ while(true){
 			lib.searchBookMenu();
 			break;
 		case 4:
-			comingSoon();
+			lib.stats();
 			break;
 		case 5:
 			lib.saveData();
