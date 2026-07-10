@@ -13,6 +13,8 @@ class Book{
         std::string getAuthor() const;
         double getPrice() const;
         int getQuantity() const;
+        void setQuantity(int quantity);
+
         Book(int id,
             std::string& title,
             std::string& author,

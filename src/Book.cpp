@@ -36,6 +36,8 @@ void Book::printBook() const{
     std::cout<<"Author:"<<author <<std::endl;
     std::cout<<"Price:"<<price <<std::endl;
     std::cout<<"Quantity:"<<quantity <<std::endl;
+    std::cout<< "Availability:"<< (quantity>0 ? "Available":"UnAvailable")
+            <<std::endl;
     std::cout<<"\n=====================================\n"
             <<std::endl;
 }

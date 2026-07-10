@@ -19,11 +19,12 @@ class Library{
         void stats();
 
         void searchBookMenu();
-        void searchID();
-        void searchTitle();
-        void searchAuthor();
-        int available();
-        void removeBook();
+        void bookOptions(Book* book);
+        Book* searchID();
+        Book* searchTitle();
+        Book* searchAuthor();
+        void editBook(Book* book);
+        void removeBook(Book* book);
 
         void saveData();
         void loadData();
