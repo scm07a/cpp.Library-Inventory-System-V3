@@ -128,18 +128,36 @@ void Library::searchBookMenu(){
             book = searchID();
             bookOptions(book);
             break;
+
         case 2:
             std::cout<<"Enter The Book Title(Case Sensitive):";
-            comingSoon();
-            // book = searchTitle();
-            // bookOptions(book);
+            book = searchTitle();
+            bookOptions(book);
             break;
-        case 3:
+
+        case 3:{
             std::cout<<"Enter Author's Full Name (Case Sensitive):";
-            comingSoon();
-            // book = searchAuthor();
-            // bookOptions(book);
+            auto matches = searchAuthor();
+
+            if (matches.empty()){
+                std::cout<<"No Books Found..."<<std::endl;
+                Sleep(1000);
+                break;
+            }
+
+            for(size_t i=0;i<matches.size();i++){
+                std::cout<<i+1<<". "<<std::endl;
+                matches[i]->printBook();
+            }
+
+            int matchChoice;
+            std::cout<<"Choose Book: ";
+            std::cin>>matchChoice;//! Remember To Validate Input
+            if (matchChoice>=1 && matchChoice <= matches.size())
+                bookOptions(matches[matchChoice-1]);
             break;
+        }
+
         case 4:
             return;
         default:
@@ -147,7 +165,6 @@ void Library::searchBookMenu(){
             break;
     }
 }
-
 void Library::bookOptions(Book* book){
     if (book == nullptr){
         std::cout << "Book not found." <<std::endl;
@@ -175,18 +192,16 @@ void Library::bookOptions(Book* book){
             std::cout<<"Book Returned Successfully !"<<std::endl;
             break;
         case 4:
-            comingSoon();
-            // editBook(book);
+            std::cout<<'\n';
+            editBook(book);
             break;
         case 5:
-            comingSoon();
-            // removeBook(book);
+            removeBook(book);
             break;
         case 6:
             return;
     }
 }
-
 Book* Library::searchID(){
     int IDChoice;
     std::cin>>IDChoice;//! Remember To Validate Input
@@ -196,6 +211,84 @@ Book* Library::searchID(){
             return &books[i];
     }
     return nullptr;
+}
+Book* Library::searchTitle(){
+    std::string titleChoice;
+    std::cin.ignore();//! Remember To Validate Input
+    std::getline(std::cin,titleChoice);//! Remember To Validate Input
+    for(size_t i=0;i<books.size();i++){
+        if(titleChoice==books[i].getTitle())
+            return &books[i];
+    }
+    return nullptr;
+}
+std::vector<Book*> Library::searchAuthor(){
+    std::string authorChoice;
+    std::vector <Book*> authBooks;
+    std::cin.ignore();
+    std::getline(std::cin,authorChoice);
+    for (Book &book:books){
+        if(book.getAuthor()==authorChoice)
+            authBooks.push_back(&book);
+    }
+    return authBooks;
+}
+//! Validate Input Of editBook() Method Below
+void Library::editBook(Book* book){
+    int choice, quantity;
+    std::string title, author;
+    double price;
+    std::cout<<"What Do You Want To Edit?"<<std::endl;
+    std::cout<<"1. Title. 2.Author. 3.Price. 4. Quantity"<<std::endl;
+    std::cout<<"Choice:";
+    std::cin>>choice;
+    std::cin.ignore();
+    switch(choice){
+
+        case 1:
+            std::cout<<"New Book Title:";
+            std::cin.ignore();
+            std::getline(std::cin,title);
+            book->setTitle(title);
+            std::cout<<"New Title Set Successfully..."<<std::endl;
+            break;
+        
+        case 2:
+            std::cout<<"New Author Name:";
+            std::cin.ignore();
+            std::getline(std::cin,author);
+            book->setAuthor(author);
+            std::cout<<"New Author Name Set Successfully..."<<std::endl;
+            break;
+
+        case 3:
+            std::cout<<"New Book Price:";
+            std::cin>>price;
+            book->setPrice(price);
+            std::cout<<"New Price Set Successfully..."<<std::endl;
+            break;
+
+        case 4:
+            std::cout<<"New Book Quantity:";
+            std::cin>>quantity;
+            book->setQuantity(quantity);
+            std::cout<<"New Quantity Set Successfully..."<<std::endl;
+            break;
+
+        default:
+            printErr();
+            break;
+    }
+}
+void Library::removeBook(Book* book){
+    for (auto it=books.begin(); it!=books.end();++it){
+        if(&(*it) == book){
+            books.erase(it);
+            std::cout<<"Book Removed Successfully..."<<std::endl;
+            return;
+        }
+    }
+    std::cout<<"Book Not Found..."<<std::endl;
 }
 
 void Library::saveData(){

@@ -22,7 +22,7 @@ class Library{
         void bookOptions(Book* book);
         Book* searchID();
         Book* searchTitle();
-        Book* searchAuthor();
+        std::vector<Book*> searchAuthor();
         void editBook(Book* book);
         void removeBook(Book* book);
 
