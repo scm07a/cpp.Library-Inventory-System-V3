@@ -1,6 +1,5 @@
 #include <iostream>
 #include <windows.h>
-#include <filesystem>
 #include "Library.h"
 #include "Book.h"
 #include "Utils.h"
@@ -25,11 +24,7 @@ while(true){
 			<<std::endl;
 	std::cout<<"5. Save Data.             6. Reset Data."
 			<<std::endl;
-
-	std::cout<<"Choice:";
-	std::cin>>choice;
-	//! Remember To Validate Input Above
-	std::cin.ignore();
+	input(choice,"Enter Choice:");
 	switch(choice){
 		case 0:
 			if (exitMenu())

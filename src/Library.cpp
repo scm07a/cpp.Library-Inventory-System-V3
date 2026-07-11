@@ -6,23 +6,15 @@
 #include "Utils.h"
 
 Library::Library():nextID(1){}
-//! Validate Input In addBook Method
 void Library::addBook(){
     int quantity;
     std::string title,author;
     double price;
 
-    std::cout<<"Enter Title:";
-    std::getline(std::cin,title);
-
-    std::cout<<"Enter Author:";
-    std::getline(std::cin,author);
-
-    std::cout<<"Enter Price:" ;
-    std::cin>>price;
-
-    std::cout<<"Enter Quantity:";
-    std::cin>>quantity;
+    input(title,"Enter Title:");
+    input(author,"Enter Author's Name:");
+    input(price,"Enter Price:");
+    input(quantity,"Enter Quantity:");
 
     Book newBook=Book(nextID,title,author,price,quantity);
     books.push_back(newBook);
@@ -30,6 +22,11 @@ void Library::addBook(){
 }
 
 void Library::displayAllBooks(){
+    if (books.empty()){
+    std::cout<<"The Library Is Empty..."<<std::endl;
+    Sleep(1000);
+    return;
+    }
     int choice;
     for (const Book &book: books)
         book.printBook();
@@ -40,9 +37,7 @@ void Library::displayAllBooks(){
                 <<std::endl;
         std::cout<<"          5.Return To Main Menu. "
                 <<std::endl;
-
-        std::cout<<"Choice: ";
-        std::cin>>choice;//! Remember To Validate Input
+        input(choice,"Enter Choice:");
         switch(choice){
             case 1: fAscendingID(); break;
             case 2: fAscendingPrice(); break;
@@ -170,23 +165,20 @@ void Library::searchBookMenu(){
     std::cout<<"Search By:-"<<std::endl;
     std::cout<<"1. ID. 2. Title. 3. Author. 4. Return To Main Menu."
             <<std::endl;
-    std::cin>>choice;//! Remember To Validate Input
+    input(choice,"Enter Choice:");
     Book* book = nullptr;
     switch(choice){
         case 1:
-            std::cout<<"Enter The Book ID:";
             book = searchID();
             bookOptions(book);
             break;
 
         case 2:
-            std::cout<<"Enter The Book Title(Case Sensitive):";
             book = searchTitle();
             bookOptions(book);
             break;
 
         case 3:{
-            std::cout<<"Enter Author's Full Name (Case Sensitive):";
             auto matches = searchAuthor();
 
             if (matches.empty()){
@@ -201,9 +193,8 @@ void Library::searchBookMenu(){
             }
 
             int matchChoice;
-            std::cout<<"Choose Book: ";
-            std::cin>>matchChoice;//! Remember To Validate Input
-            if (matchChoice>=1 && matchChoice <= matches.size())
+            input(matchChoice,"Choose Book:");
+            if (matchChoice>=1 && static_cast<std::size_t>(matchChoice) <= matches.size())
                 bookOptions(matches[matchChoice-1]);
             break;
         }
@@ -226,8 +217,7 @@ void Library::bookOptions(Book* book){
     book->printBook();
     std::cout<<"1. Purchase. 2. Borrow. 3. Return." <<std::endl;
     std::cout<<"4. Edit.     5. Delete  6. Return To Main Menu."<<std::endl;
-    std::cout<<"Choice:";
-    std::cin>>choice;//! Remember To Validate Input
+    input(choice,"Enter Choice:");
     switch(choice){
         case 1:
             book->setQuantity(quantity-1);
@@ -254,8 +244,7 @@ void Library::bookOptions(Book* book){
 }
 Book* Library::searchID(){
     int IDChoice;
-    std::cin>>IDChoice;//! Remember To Validate Input
-    std::cin.ignore();//! Remember To Validate Input
+    input(IDChoice,"Enter The Book ID:");
     for (size_t i=0;i<books.size();i++){
         if (IDChoice == books[i].getID())
             return &books[i];
@@ -264,8 +253,7 @@ Book* Library::searchID(){
 }
 Book* Library::searchTitle(){
     std::string titleChoice;
-    std::cin.ignore();//! Remember To Validate Input
-    std::getline(std::cin,titleChoice);//! Remember To Validate Input
+    input(titleChoice,"Enter The Book Title(Case Sensitive):");
     for(size_t i=0;i<books.size();i++){
         if(titleChoice==books[i].getTitle())
             return &books[i];
@@ -275,15 +263,13 @@ Book* Library::searchTitle(){
 std::vector<Book*> Library::searchAuthor(){
     std::string authorChoice;
     std::vector <Book*> authBooks;
-    std::cin.ignore();
-    std::getline(std::cin,authorChoice);
+    input(authorChoice,"Enter Author's Full Name (Case Sensitive):");
     for (Book &book:books){
         if(book.getAuthor()==authorChoice)
             authBooks.push_back(&book);
     }
     return authBooks;
 }
-//! Validate Input Of editBook() Method Below
 void Library::editBook(Book* book){
     int choice, quantity;
     std::string title, author;
@@ -296,31 +282,25 @@ void Library::editBook(Book* book){
     switch(choice){
 
         case 1:
-            std::cout<<"New Book Title:";
-            std::cin.ignore();
-            std::getline(std::cin,title);
+            input(title,"Set New Title:");
             book->setTitle(title);
             std::cout<<"New Title Set Successfully..."<<std::endl;
             break;
         
         case 2:
-            std::cout<<"New Author Name:";
-            std::cin.ignore();
-            std::getline(std::cin,author);
+            input(author,"Set New Author Name:");
             book->setAuthor(author);
             std::cout<<"New Author Name Set Successfully..."<<std::endl;
             break;
 
         case 3:
-            std::cout<<"New Book Price:";
-            std::cin>>price;
+            input(price,"Set New Price:");
             book->setPrice(price);
             std::cout<<"New Price Set Successfully..."<<std::endl;
             break;
 
         case 4:
-            std::cout<<"New Book Quantity:";
-            std::cin>>quantity;
+            input(quantity,"Set New Quantity:");
             book->setQuantity(quantity);
             std::cout<<"New Quantity Set Successfully..."<<std::endl;
             break;
@@ -329,12 +309,14 @@ void Library::editBook(Book* book){
             printErr();
             break;
     }
+    saveData();
 }
 void Library::removeBook(Book* book){
     for (auto it=books.begin(); it!=books.end();++it){
         if(&(*it) == book){
             books.erase(it);
             std::cout<<"Book Removed Successfully..."<<std::endl;
+            saveData();
             return;
         }
     }
@@ -366,7 +348,7 @@ void Library::loadData(){
     double price;
     std::ifstream file("../Data/Library.txt");
     if(!file.is_open()){
-        std::cout<<"Error! No Save File Found..."<<std::endl;
+        std::cout<<"No Save File Found..."<<std::endl;
         return;
     }
     file>> nextID;

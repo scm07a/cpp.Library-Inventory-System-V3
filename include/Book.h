@@ -15,14 +15,14 @@ class Book{
         int getQuantity() const;
         
         void setID(int id);
-        void setTitle(std::string& title);
-        void setAuthor(std::string& author);
+        void setTitle(const std::string& title);
+        void setAuthor(const std::string& author);
         void setPrice(double price);
         void setQuantity(int quantity);
 
         Book(int id,
-            std::string& title,
-            std::string& author,
+            const std::string& title,
+            const std::string& author,
             double price,
             int quantity);
         void printBook() const;

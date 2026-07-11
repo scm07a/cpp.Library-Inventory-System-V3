@@ -20,10 +20,10 @@ int Book::getQuantity() const{
 void Book::setID(int id){
     this->id=id;
 }
-void Book::setTitle(std::string& title){
+void Book::setTitle(const std::string& title){
     this->title=title;
 }
-void Book::setAuthor(std::string& author){
+void Book::setAuthor(const std::string& author){
     this->author=author;
 }
 void Book::setPrice(double price){
@@ -35,8 +35,8 @@ void Book::setQuantity(int quantity){
 
 Book::Book(
             int id,
-            std::string& title,
-            std::string& author,
+            const std::string& title,
+            const std::string& author,
             double price,
             int quantity):
                 id(id),
