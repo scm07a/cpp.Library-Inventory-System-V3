@@ -7,6 +7,7 @@
 
 Library::Library():nextID(1){}
 void Library::addBook(){
+    system("cls");
     int quantity;
     std::string title,author;
     double price;
@@ -22,6 +23,7 @@ void Library::addBook(){
 }
 
 void Library::displayAllBooks(){
+    system("cls");
     if (books.empty()){
     std::cout<<"The Library Is Empty..."<<std::endl;
     Sleep(1000);
@@ -39,7 +41,7 @@ void Library::displayAllBooks(){
                 <<std::endl;
         input(choice,"Enter Choice:");
         switch(choice){
-            case 1: fAscendingID(); break;
+            case 1: fAscendingID();  break;
             case 2: fAscendingPrice(); break;
             case 3: fDescendingID(); break;
             case 4: fDescendingPrice(); break;
@@ -50,7 +52,6 @@ void Library::displayAllBooks(){
                 break;
         }
     }
-    
 }
 
 void Library::fAscendingID(){
@@ -106,6 +107,8 @@ void Library::fDescendingPrice(){
 }
 
 void Library::stats(){
+    system("cls");
+    char menu_return = 'f';
     if (books.empty()){
     std::cout<<"The Library Is Empty..."<<std::endl;
     Sleep(1000);
@@ -142,22 +145,27 @@ void Library::stats(){
     avgPrice/=totalBooks;
 
     //* Stats Menu
-
-    std::cout<<"============" <<std::endl;
-    std::cout<<" Statistics" <<std::endl;
-    std::cout<<"============" <<std::endl <<'\n';
-    std::cout<<"Total Books: "<<totalBooks <<std::endl;
-    std::cout<<"Total Copies: "<<totalCopies <<std::endl;
-    std::cout<<"Total Available Copies: "<<availableCopies <<std::endl <<'\n';
-    std::cout<<"Inventory Value: $"<<invValue <<std::endl <<'\n';
-    std::cout<<"The Most Expensive Book: "<<expensiveTitle <<" ($"
-                <<expensivePrice <<")"<<std::endl;
-    std::cout<<"The Cheapest Book: "<<cheapTitle <<" ($"
-                <<cheapPrice <<")"<<std::endl <<'\n';
-    std::cout<<"Average Book Price: $" <<avgPrice <<std::endl <<'\n';
+    while (true){
+        std::cout<<"============" <<std::endl;
+        std::cout<<" Statistics" <<std::endl;
+        std::cout<<"============" <<std::endl <<'\n';
+        std::cout<<"Total Books: "<<totalBooks <<std::endl;
+        std::cout<<"Total Copies: "<<totalCopies <<std::endl;
+        std::cout<<"Total Available Copies: "<<availableCopies <<std::endl <<'\n';
+        std::cout<<"Inventory Value: $"<<invValue <<std::endl <<'\n';
+        std::cout<<"The Most Expensive Book: "<<expensiveTitle <<" ($"
+                    <<expensivePrice <<")"<<std::endl;
+        std::cout<<"The Cheapest Book: "<<cheapTitle <<" ($"
+                    <<cheapPrice <<")"<<std::endl <<'\n';
+        std::cout<<"Average Book Price: $" <<avgPrice <<std::endl <<"\n\n";
+        input(menu_return,"Return To Main Menu(Y/n):");
+        if (menu_return == 'Y' || menu_return == 'y') break;
+        else system("cls");
+    }
 }
 
 void Library::searchBookMenu(){
+    system("cls");
     int choice;
     std::cout<<"================="<<std::endl;
     std::cout<<"Search For A Book"<<std::endl;
@@ -277,8 +285,7 @@ void Library::editBook(Book* book){
     std::cout<<"What Do You Want To Edit?"<<std::endl;
     std::cout<<"1. Title. 2.Author. 3.Price. 4. Quantity"<<std::endl;
     std::cout<<"Choice:";
-    std::cin>>choice;
-    std::cin.ignore();
+    input(choice,"Enter Choice:");
     switch(choice){
 
         case 1:
@@ -324,7 +331,7 @@ void Library::removeBook(Book* book){
 }
 
 void Library::saveData(){
-    std::ofstream file("../Data/Library.txt");
+    std::ofstream file(getSavePath());
 
     if(!file.is_open()){
         std::cout<<"Error Opening The File..."<<std::endl;
@@ -346,7 +353,7 @@ void Library::loadData(){
     int id, quantity;
     std::string title, author;
     double price;
-    std::ifstream file("../Data/Library.txt");
+    std::ifstream file(getSavePath());
     if(!file.is_open()){
         std::cout<<"No Save File Found..."<<std::endl;
         return;
@@ -365,15 +372,20 @@ void Library::loadData(){
     file.close();
 }
 void Library::resetData(){
-    std::ofstream file("../Data/Library.txt");
+    char choice;
+    input(choice,"Are You Sure You Want To Reset Your Data? This Action Can't Be Undone!!!(Y/n):");
+    if (choice =='Y' || choice=='y'){
+        std::ofstream file(getSavePath());
 
-    if(!file.is_open()){
-        std::cout<<"Error Resetting The File..."<<std::endl;
-        return;
+        if(!file.is_open()){
+            std::cout<<"Error Resetting The File..."<<std::endl;
+            return;
+        }
+        books.clear();
+        nextID=1;
+        std::cout<<"Data Reset Successfully !" <<std::endl;
+        Sleep(1000);
+        file.close();
     }
-    books.clear();
-    nextID=1;
-    std::cout<<"Data Reset Successfully !" <<std::endl;
-    Sleep(1000);
-    file.close();
+    else return;
 }

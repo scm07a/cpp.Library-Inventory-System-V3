@@ -1,5 +1,9 @@
 #pragma once
-#include <string>
+#include <iostream>
+#include <limits>
+#include <cstdlib>
+#include <filesystem>
+
 void printErr();
 void comingSoon();
 
@@ -16,7 +20,6 @@ void input(T& var, const std::string& prompt){
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
             continue;
         }
-        std::cin>>std::ws;
         if(std::cin.peek()!='\n'){
             printErr();
             std::cin.ignore(
@@ -27,3 +30,5 @@ void input(T& var, const std::string& prompt){
     }
 }
 void input(std::string& str, const std::string& prompt);
+
+std::filesystem::path getSavePath();
