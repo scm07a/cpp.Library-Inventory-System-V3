@@ -9,8 +9,8 @@ class Book{
         int quantity;
     public:
         int getID() const;
-        std::string getTitle() const;
-        std::string getAuthor() const;
+        const std::string& getTitle() const;
+        const std::string& getAuthor() const;
         double getPrice() const;
         int getQuantity() const;
         

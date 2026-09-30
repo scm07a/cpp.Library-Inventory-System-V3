@@ -11,15 +11,15 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # ---------- Warnings ----------
-if(MSVC)
-    add_compile_options(/W4)
-else()
+# if(MSVC)
+#     add_compile_options(/W4)
+# else()
     add_compile_options(
         -Wall
         -Wextra
         -Wpedantic
     )
-endif()
+# endif()
 
 # ---------- Sources ----------
 file(GLOB_RECURSE SOURCES

@@ -4,10 +4,10 @@
 int Book::getID() const{
     return id;
 }
-std::string Book::getTitle() const{
+const std::string& Book::getTitle() const{
     return title;
 }
-std::string Book::getAuthor() const{
+const std::string& Book::getAuthor() const{
     return author;
 }
 double Book::getPrice() const{

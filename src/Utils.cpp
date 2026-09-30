@@ -4,6 +4,7 @@
 #include <filesystem>
 #include <windows.h>
 #include "Utils.h"
+
 void printErr(){
     std::cout<<"Error! Try Again"<<std::endl;
     Sleep(1000);
@@ -13,15 +14,13 @@ void comingSoon(){
     Sleep(1000);
 }
 
-int exitMenu(){
+bool exitMenu(){
     char choice;
-    std::cout<<"Are You Sure You Want To Exit?(Y/n)" <<std::endl;
-    std::cin>>choice;
-    //! Remember To Validate Input Above
-    if (choice == 'y' || choice == 'Y') return 1; 
+    input(choice,"Are You Sure You Want To Exit?(Y/n)");
+    if (choice == 'y' || choice == 'Y') return true; 
     Sleep(1000);
     system("cls");
-    return 0;
+    return false;
 }
 
 void input(std::string& str, const std::string& prompt){

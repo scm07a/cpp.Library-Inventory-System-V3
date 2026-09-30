@@ -7,7 +7,7 @@
 void printErr();
 void comingSoon();
 
-int exitMenu();
+bool exitMenu();
 
 template <typename T>
 void input(T& var, const std::string& prompt){

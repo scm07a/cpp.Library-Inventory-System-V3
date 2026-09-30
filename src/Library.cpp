@@ -5,7 +5,8 @@
 #include "Library.h"
 #include "Utils.h"
 
-Library::Library():nextID(1){}
+Library::Library()=default;
+
 void Library::addBook(){
     system("cls");
     int quantity;
@@ -55,10 +56,10 @@ void Library::displayAllBooks(){
 }
 
 void Library::fAscendingID(){
-    size_t n =books.size();
+    std::size_t n =books.size();
     std::vector <Book> books_copy = books;
-    for (size_t i=0;i<n-1;i++){
-        for (size_t j=0;j<n-i-1;j++){
+    for (std::size_t i=0;i<n-1;i++){
+        for (std::size_t j=0;j<n-i-1;j++){
             if (books_copy[j].getID()>books_copy[j+1].getID())
                 std::swap(books_copy[j],books_copy[j+1]);
         }
@@ -68,10 +69,10 @@ void Library::fAscendingID(){
 }
 
 void Library::fAscendingPrice(){
-    size_t n = books.size();
+    std::size_t n = books.size();
     std::vector <Book> books_copy = books;
-    for (size_t i=0;i<n-1;i++){
-        for (size_t j=0;j<n-i-1;j++){
+    for (std::size_t i=0;i<n-1;i++){
+        for (std::size_t j=0;j<n-i-1;j++){
             if (books_copy[j].getPrice()>books_copy[j+1].getPrice())
                 std::swap(books_copy[j],books_copy[j+1]);
         }
@@ -81,10 +82,10 @@ void Library::fAscendingPrice(){
 }
 
 void Library::fDescendingID(){
-    size_t n =books.size();
+    std::size_t n =books.size();
     std::vector <Book> books_copy = books;
-    for (size_t i=0;i<n-1;i++){
-        for (size_t j=0;j<n-i-1;j++){
+    for (std::size_t i=0;i<n-1;i++){
+        for (std::size_t j=0;j<n-i-1;j++){
             if (books_copy[j].getID()<books_copy[j+1].getID())
                 std::swap(books_copy[j],books_copy[j+1]);
         }
@@ -94,10 +95,10 @@ void Library::fDescendingID(){
 }
 
 void Library::fDescendingPrice(){
-    size_t n = books.size();
+    std::size_t n = books.size();
     std::vector <Book> books_copy = books;
-    for (size_t i=0;i<n-1;i++){
-        for (size_t j=0;j<n-i-1;j++){
+    for (std::size_t i=0;i<n-1;i++){
+        for (std::size_t j=0;j<n-i-1;j++){
             if (books_copy[j].getPrice()<books_copy[j+1].getPrice())
                 std::swap(books_copy[j],books_copy[j+1]);
         }
@@ -195,7 +196,7 @@ void Library::searchBookMenu(){
                 break;
             }
 
-            for(size_t i=0;i<matches.size();i++){
+            for(std::size_t i=0;i<matches.size();i++){
                 std::cout<<i+1<<". "<<std::endl;
                 matches[i]->printBook();
             }
@@ -253,7 +254,7 @@ void Library::bookOptions(Book* book){
 Book* Library::searchID(){
     int IDChoice;
     input(IDChoice,"Enter The Book ID:");
-    for (size_t i=0;i<books.size();i++){
+    for (std::size_t i=0;i<books.size();i++){
         if (IDChoice == books[i].getID())
             return &books[i];
     }
@@ -262,7 +263,7 @@ Book* Library::searchID(){
 Book* Library::searchTitle(){
     std::string titleChoice;
     input(titleChoice,"Enter The Book Title(Case Sensitive):");
-    for(size_t i=0;i<books.size();i++){
+    for(std::size_t i=0;i<books.size();i++){
         if(titleChoice==books[i].getTitle())
             return &books[i];
     }
@@ -331,6 +332,10 @@ void Library::removeBook(Book* book){
 }
 
 void Library::saveData(){
+    if (books.empty()){
+        std::cout<<"The Inventory Is Empty..."<<std::endl;
+        return;
+    }
     std::ofstream file(getSavePath());
 
     if(!file.is_open()){
@@ -355,7 +360,7 @@ void Library::loadData(){
     double price;
     std::ifstream file(getSavePath());
     if(!file.is_open()){
-        std::cout<<"No Save File Found..."<<std::endl;
+        std::cout<<"Error Loading Data..."<<std::endl;
         return;
     }
     file>> nextID;
@@ -372,6 +377,10 @@ void Library::loadData(){
     file.close();
 }
 void Library::resetData(){
+    if (books.empty()){
+        std::cout<<"The Inventory Is Empty"<<std::endl;
+        return;
+    }
     char choice;
     input(choice,"Are You Sure You Want To Reset Your Data? This Action Can't Be Undone!!!(Y/n):");
     if (choice =='Y' || choice=='y'){

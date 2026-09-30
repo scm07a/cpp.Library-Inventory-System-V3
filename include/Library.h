@@ -4,7 +4,7 @@
 
 class Library{
     private:
-        int nextID;
+        int nextID=1;
         std::vector <Book> books;
     public:
         Library();
