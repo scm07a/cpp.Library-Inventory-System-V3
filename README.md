@@ -2,9 +2,9 @@
 
 A modern C++23 console application for managing a personal library inventory.
 
-Library Inventory Manager V3 is a complete redesign of my previous **Library V2** project, which was written in C. This version focuses on object-oriented programming, cleaner software architecture, reusable components, and modern C++ practices while remaining lightweight and fully console-based.
+Library Inventory Manager V3 is a complete redesign of my previous C implementation, rebuilt using object-oriented design principles and modern C++ practices. The project focuses on maintainable architecture, modular components, persistent storage, and a clean separation between data management and user interaction.
 
-> **Status:** Beta (Core Features Complete)
+> **Status:** v1.0.0 Released
 
 ---
 
@@ -13,16 +13,16 @@ Library Inventory Manager V3 is a complete redesign of my previous **Library V2*
 ## Library Management
 
 - Add new books
-- Display all books
-- Edit existing books
+- Edit book information
 - Delete books
-- Automatic Book ID generation
+- Display all books
+- Automatic ID generation
 
 ## Search
 
-Search books by:
+Search the library by:
 
-- ID
+- Book ID
 - Title
 - Author
 
@@ -34,58 +34,60 @@ Search books by:
 
 ## Sorting
 
-Sort the library by:
+Sort books by:
 
-- ID (Ascending)
-- ID (Descending)
-- Price (Ascending)
-- Price (Descending)
+- ID (Ascending / Descending)
+- Price (Ascending / Descending)
 
 ## Statistics
 
-View useful library statistics including:
+Generate inventory statistics including:
 
 - Total unique books
 - Total copies
 - Available copies
-- Total inventory value
+- Inventory value
 - Most expensive book
 - Cheapest book
 - Average book price
 
 ## Data Persistence
 
-- Automatic save/load
-- Save files stored inside:
+- Automatic save and load
+- Save files stored in:
 
 ```text
 C:\Users\<Username>\Documents\Library Inventory\
 ```
 
-- Automatically creates the save directory if it does not exist.
+The application automatically creates the save directory when it does not already exist.
 
-## Input Validation
+## Installer
 
-- Generic template input function for numeric types
-- Overloaded input function for strings
-- Handles invalid user input safely
+The project includes a Windows installer built with **Inno Setup**, providing:
+
+- One-click installation
+- Desktop shortcut creation
+- Start Menu integration
+- Automatic uninstaller
+- Custom application icon
 
 ---
 
-# Technologies Used
+# Technologies
 
 - C++23
 - CMake
 - Ninja
-- Object-Oriented Programming (OOP)
-- Standard Template Library (STL)
+- Inno Setup
 
-Libraries and containers used:
+### Standard Library Components
 
-- `std::vector`
-- `std::string`
-- `std::filesystem`
-- `std::fstream`
+- Containers
+- File Streams
+- Filesystem
+- Algorithms
+- Templates
 
 ---
 
@@ -93,6 +95,10 @@ Libraries and containers used:
 
 ```text
 Library-V3/
+│
+├── assets/
+│   ├── library.ico
+│   └── LibraryV3.rc
 │
 ├── include/
 │   ├── Book.h
@@ -105,58 +111,47 @@ Library-V3/
 │   ├── Utils.cpp
 │   └── main.cpp
 │
+├── installer/
+│   └── LibraryInstaller.iss
+│
 ├── CMakeLists.txt
 └── README.md
 ```
 
 ---
 
-# Concepts Practiced
+# Software Design
 
-This project was built as part of my journey toward becoming a Software Engineer.
+The project follows an object-oriented architecture centered around two primary classes:
 
-Topics practiced include:
+### Book
 
-- Classes and Objects
-- Constructors
-- Initializer Lists
-- Encapsulation
-- References
-- Const Correctness
-- Function Templates
-- Function Overloading
-- Dynamic Arrays (`std::vector`)
-- File Streams
-- Filesystem API
-- Separation of Responsibilities
-- Multi-file Project Organization
-- CMake
+Represents an individual book and encapsulates its data and operations.
 
----
+### Library
 
-# Future Improvements
+Responsible for:
 
-- Replace manual sorting algorithms with `std::sort`
-- Improve search algorithms
-- Better input validation with configurable ranges
-- Exception handling
-- Installer for Windows
-- SQLite database backend
-- Graphical interface using Qt
-- Improved console formatting
-- Unit testing
+- Inventory management
+- Searching
+- Sorting
+- Statistics generation
+- File persistence
+- Book operations
+
+Input handling and utility functionality are separated into reusable helper functions, keeping business logic isolated from user interaction.
 
 ---
 
-# Building
+# Build
 
 ## Requirements
 
-- CMake 3.20 or newer
+- CMake 3.20+
 - C++23 compatible compiler
 - Ninja (recommended)
 
-## Build
+## Build Instructions
 
 ```bash
 cmake -S . -B build -G Ninja
@@ -165,23 +160,36 @@ cmake --build build
 
 ---
 
-# Roadmap
+# Future Improvements
 
-This project represents my transition from procedural C programming to modern C++.
+- Replace manual sorting with `std::sort`
+- Improve searching performance
+- SQLite database backend
+- Qt desktop interface
+- Unit testing
+- Configuration file support
+- Logging system
+- Cross-platform support
 
-Planned progression:
+---
 
-- ✅ Procedural Programming (C)
-- ✅ Object-Oriented Programming (C++)
-- 🔄 Data Structures & Algorithms
-- 🔄 Qt Desktop GUI
-- 🔄 SQLite Integration
-- 🔄 Full Library Management Application
+# About This Project
+
+Library Inventory Manager V3 represents my transition from procedural C programming to modern C++ software development.
+
+The project emphasizes:
+
+- Object-oriented design
+- Modular architecture
+- Maintainable code organization
+- Persistent data management
+- Build system configuration with CMake
+- Windows application packaging
 
 ---
 
 # Author
 
-Developed by **Mohamed Mourad** as part of my Software Engineering learning journey.
+**Mohamed Mourad**
 
-Library Inventory Manager V3 is focused on learning clean architecture, object-oriented programming, and modern C++ while building a complete real-world application from scratch.
+Computer Science student with an interest in software engineering, desktop application development, and modern C++.
