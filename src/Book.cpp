@@ -1,5 +1,5 @@
 #include "Book.h"
-#include <iostream>
+#include <print>
 
 int Book::getID() const{
     return id;
@@ -46,14 +46,14 @@ Book::Book(
                 quantity(quantity){}
 
 void Book::printBook() const{
-    std::cout<<'\n';
-    std::cout<<"ID:# "<<id <<std::endl;
-    std::cout<<"Title:"<<title <<std::endl;
-    std::cout<<"Author:"<<author <<std::endl;
-    std::cout<<"Price:"<<price <<std::endl;
-    std::cout<<"Quantity:"<<quantity <<std::endl;
-    std::cout<< "Availability:"<< (quantity>0 ? "Available":"UnAvailable")
-            <<std::endl;
-    std::cout<<"\n=====================================\n"
-            <<std::endl;
+    std::println("");
+    std::println("ID:# {}", id);
+    std::println("Title:{}", title);
+    std::println("Author:{}", author);
+    std::println("Price:{}", price);
+    std::println("Quantity:{}", quantity);
+    std::println("Availability:{}", quantity > 0 ? "Available" : "UnAvailable");
+    std::println("");
+    std::println("=====================================");
+    std::println("");
 }
