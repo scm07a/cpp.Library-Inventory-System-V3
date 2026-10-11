@@ -1,3 +1,4 @@
+#include <print>
 #include <iostream>
 #include <limits>
 #include <cstdlib>
@@ -6,11 +7,11 @@
 #include "Utils.h"
 
 void printErr(){
-    std::cout<<"Error! Try Again"<<std::endl;
+    std::println("Error! Try Again");
     Sleep(1000);
 }
 void comingSoon(){
-    std::cout<<"Coming Soon..."<<std::endl;
+    std::println("Coming Soon...");
     Sleep(1000);
 }
 
@@ -25,7 +26,7 @@ bool exitMenu(){
 
 void input(std::string& str, const std::string& prompt){
     while (true){
-        std::cout<<prompt;
+        std::print("{}",prompt);
         std::getline(std::cin>>std::ws,str);
         if(std::cin.fail()){
             printErr();

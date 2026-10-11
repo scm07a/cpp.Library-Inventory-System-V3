@@ -1,4 +1,5 @@
-#include <iostream>
+#include <print>
+#include <string>
 #include <fstream>
 #include <windows.h>
 #include "Book.h"
@@ -12,12 +13,10 @@ void Library::addBook(){
     int quantity;
     std::string title,author;
     double price;
-
     input(title,"Enter Title:");
     input(author,"Enter Author's Name:");
     input(price,"Enter Price:");
     input(quantity,"Enter Quantity:");
-
     Book newBook=Book(nextID,title,author,price,quantity);
     books.push_back(newBook);
     nextID++;
@@ -26,20 +25,17 @@ void Library::addBook(){
 void Library::displayAllBooks(){
     system("cls");
     if (books.empty()){
-    std::cout<<"The Library Is Empty..."<<std::endl;
-    Sleep(1000);
+        std::println("The Library Is Empty...");
+        Sleep(1000);
     return;
     }
     int choice;
     for (const Book &book: books)
         book.printBook();
     while (true){
-        std::cout<<"1. Sort By ID ↑.         2. Sort By Price ↑."
-                <<std::endl;
-        std::cout<<"3. Sort By ID ↓.         4. Sort By Price ↓."
-                <<std::endl;
-        std::cout<<"          5.Return To Main Menu. "
-                <<std::endl;
+        std::println("1. Sort By ID ↑.         2. Sort By Price ↑.");
+        std::println("3. Sort By ID ↓.         4. Sort By Price ↓.");
+        std::println("          5.Return To Main Menu. ");
         input(choice,"Enter Choice:");
         switch(choice){
             case 1: fAscendingID();  break;
@@ -111,69 +107,69 @@ void Library::stats(){
     system("cls");
     char menu_return = 'f';
     if (books.empty()){
-    std::cout<<"The Library Is Empty..."<<std::endl;
+    std::println("The Library Is Empty...");
     Sleep(1000);
     return;
     }
 
-    int totalBooks=books.size(),
+    std::size_t totalBooks=books.size(),
             totalCopies=0,
             availableCopies=0;
     std::string expensiveTitle, cheapTitle;
     double invValue=0, expensivePrice=-999, cheapPrice=999, avgPrice=0;
     for(const Book& book:books){
-        //* Calculates Total Copies
+        //* Calculates Total Copies*
         totalCopies+=book.getQuantity();
-        //* Calculates Total Available Copies
+        //* Calculates Total Available Copies*
         if(book.getQuantity()>0)
             availableCopies+=book.getQuantity();
-        //* Calculates Inventory Value
+        //* Calculates Inventory Value*
         invValue+=book.getPrice()*book.getQuantity();
-        //* Sums All Book Prices In Loop
+        //* Sums All Book Prices In Loop*
         avgPrice+=book.getPrice();
-        //* Expensive Book Search
+        //* Expensive Book Search*
         if(book.getPrice()>expensivePrice){
             expensivePrice=book.getPrice();
             expensiveTitle=book.getTitle();
         }
-        //* Cheap Book Search
+        //* Cheap Book Search*
         if(book.getPrice()<cheapPrice){
             cheapPrice=book.getPrice();
             cheapTitle=book.getTitle();
         }
     }
-    //* Divides By Total Books To Get Average
+    //* Divides By Total Books To Get Average*
     avgPrice/=totalBooks;
-
-    //* Stats Menu
+    //* Stats Menu*
     while (true){
-        std::cout<<"============" <<std::endl;
-        std::cout<<" Statistics" <<std::endl;
-        std::cout<<"============" <<std::endl <<'\n';
-        std::cout<<"Total Books: "<<totalBooks <<std::endl;
-        std::cout<<"Total Copies: "<<totalCopies <<std::endl;
-        std::cout<<"Total Available Copies: "<<availableCopies <<std::endl <<'\n';
-        std::cout<<"Inventory Value: $"<<invValue <<std::endl <<'\n';
-        std::cout<<"The Most Expensive Book: "<<expensiveTitle <<" ($"
-                    <<expensivePrice <<")"<<std::endl;
-        std::cout<<"The Cheapest Book: "<<cheapTitle <<" ($"
-                    <<cheapPrice <<")"<<std::endl <<'\n';
-        std::cout<<"Average Book Price: $" <<avgPrice <<std::endl <<"\n\n";
+        std::println("============");
+        std::println(" Statistics");
+        std::println("============\n");
+        std::println("Total Books: {}",totalBooks);
+        std::println("Total Copies: {}",totalCopies);
+        std::println("Total Available Copies: {}\n",availableCopies);
+        std::println("Average Book Price: ${}",avgPrice);
+        std::println("Inventory Value: ${}\n",invValue);
+        std::println("The Most Expensive Book: {} (${})",expensiveTitle,expensivePrice);
+        std::println("The Cheapest Book: {} (${})\n\n",cheapTitle,cheapPrice);
+        // std::cout<<"Average Book Price: $" <<avgPrice <<std::endl <<"\n\n";
         input(menu_return,"Return To Main Menu(Y/n):");
         if (menu_return == 'Y' || menu_return == 'y') break;
         else system("cls");
     }
+
 }
 
 void Library::searchBookMenu(){
     system("cls");
     int choice;
-    std::cout<<"================="<<std::endl;
-    std::cout<<"Search For A Book"<<std::endl;
-    std::cout<<"================="<<std::endl;
-    std::cout<<"Search By:-"<<std::endl;
-    std::cout<<"1. ID. 2. Title. 3. Author. 4. Return To Main Menu."
-            <<std::endl;
+
+    std::println("=================");
+    std::println("Search For A Book");
+    std::println("=================");
+    std::println("Search By:-");
+    std::println("1. ID. 2. Title. 3. Author. 4. Return To Main Menu.");
+
     input(choice,"Enter Choice:");
     Book* book = nullptr;
     switch(choice){
@@ -181,33 +177,27 @@ void Library::searchBookMenu(){
             book = searchID();
             bookOptions(book);
             break;
-
         case 2:
             book = searchTitle();
             bookOptions(book);
             break;
-
         case 3:{
             auto matches = searchAuthor();
-
             if (matches.empty()){
-                std::cout<<"No Books Found..."<<std::endl;
+                std::println("No Books Found...");
                 Sleep(1000);
                 break;
             }
-
             for(std::size_t i=0;i<matches.size();i++){
-                std::cout<<i+1<<". "<<std::endl;
+                std::println("{}. ",i+1);
                 matches[i]->printBook();
             }
-
             int matchChoice;
             input(matchChoice,"Choose Book:");
             if (matchChoice>=1 && static_cast<std::size_t>(matchChoice) <= matches.size())
                 bookOptions(matches[matchChoice-1]);
             break;
         }
-
         case 4:
             return;
         default:
@@ -215,33 +205,33 @@ void Library::searchBookMenu(){
             break;
     }
 }
+
 void Library::bookOptions(Book* book){
     if (book == nullptr){
-        std::cout << "Book not found." <<std::endl;
+        std::println("Book not found.");
         return;
     }
-
     int choice;
     int quantity = book->getQuantity();
     book->printBook();
-    std::cout<<"1. Purchase. 2. Borrow. 3. Return." <<std::endl;
-    std::cout<<"4. Edit.     5. Delete  6. Return To Main Menu."<<std::endl;
+    std::println("1. Purchase. 2. Borrow. 3. Return.");
+    std::println("4. Edit.     5. Delete  6. Return To Main Menu.");
     input(choice,"Enter Choice:");
     switch(choice){
         case 1:
             book->setQuantity(quantity-1);
-            std::cout<<"Book Purchase Successful !" <<std::endl;
+            std::println("Book Purchase Successful !");
             break;
         case 2:
             book->setQuantity(quantity-1);
-            std::cout<<"Book Borrowed Successfully !"<<std::endl;
+            std::println("Book Borrowed Successfully !");
             break;
         case 3:
             book->setQuantity(quantity+1);
-            std::cout<<"Book Returned Successfully !"<<std::endl;
+            std::println("Book Returned Successfully !");
             break;
         case 4:
-            std::cout<<'\n';
+            std::println();
             editBook(book);
             break;
         case 5:
@@ -251,6 +241,7 @@ void Library::bookOptions(Book* book){
             return;
     }
 }
+
 Book* Library::searchID(){
     int IDChoice;
     input(IDChoice,"Enter The Book ID:");
@@ -260,6 +251,7 @@ Book* Library::searchID(){
     }
     return nullptr;
 }
+
 Book* Library::searchTitle(){
     std::string titleChoice;
     input(titleChoice,"Enter The Book Title(Case Sensitive):");
@@ -269,6 +261,7 @@ Book* Library::searchTitle(){
     }
     return nullptr;
 }
+
 std::vector<Book*> Library::searchAuthor(){
     std::string authorChoice;
     std::vector <Book*> authBooks;
@@ -279,67 +272,63 @@ std::vector<Book*> Library::searchAuthor(){
     }
     return authBooks;
 }
+
 void Library::editBook(Book* book){
     int choice, quantity;
     std::string title, author;
     double price;
-    std::cout<<"What Do You Want To Edit?"<<std::endl;
-    std::cout<<"1. Title. 2.Author. 3.Price. 4. Quantity"<<std::endl;
-    std::cout<<"Choice:";
+    std::println("What Do You Want To Edit?");
+    std::println("1. Title. 2.Author. 3.Price. 4. Quantity");
+    std::print("Choice:");
     input(choice,"Enter Choice:");
     switch(choice){
-
         case 1:
             input(title,"Set New Title:");
             book->setTitle(title);
-            std::cout<<"New Title Set Successfully..."<<std::endl;
+            std::println("New Title Set Successfully...");
             break;
-        
         case 2:
             input(author,"Set New Author Name:");
             book->setAuthor(author);
-            std::cout<<"New Author Name Set Successfully..."<<std::endl;
+            std::println("New Author Name Set Successfully...");
             break;
-
         case 3:
             input(price,"Set New Price:");
             book->setPrice(price);
-            std::cout<<"New Price Set Successfully..."<<std::endl;
+            std::println("New Price Set Successfully...");
             break;
-
         case 4:
             input(quantity,"Set New Quantity:");
             book->setQuantity(quantity);
-            std::cout<<"New Quantity Set Successfully..."<<std::endl;
+            std::println("New Quantity Set Successfully...");
             break;
-
         default:
             printErr();
             break;
     }
     saveData();
 }
+
 void Library::removeBook(Book* book){
     for (auto it=books.begin(); it!=books.end();++it){
         if(&(*it) == book){
             books.erase(it);
-            std::cout<<"Book Removed Successfully..."<<std::endl;
+            std::println("Book Removed Successfully...");
             saveData();
             return;
         }
     }
-    std::cout<<"Book Not Found..."<<std::endl;
+    std::println("Book Not Found...");
 }
 
 void Library::saveData(){
     if (books.empty()){
-        std::cout<<"The Inventory Is Empty..."<<std::endl;
+        std::println("The Inventory Is Empty...");
         return;
     }
     std::ofstream file(getSavePath());
-
     if(!file.is_open()){
-        std::cout<<"Error Opening The File..."<<std::endl;
+        std::println("Error Opening The File...");
         return;
     }
     file<<nextID <<'\n';
@@ -351,16 +340,17 @@ void Library::saveData(){
         file<<book.getQuantity() <<'\n';
     }
     file.close();
-    std::cout<<"Data Saved Successfully" <<std::endl;
+    std::println("Data Saved Successfully");
     Sleep(1000);
 }
+
 void Library::loadData(){
     int id, quantity;
     std::string title, author;
     double price;
     std::ifstream file(getSavePath());
     if(!file.is_open()){
-        std::cout<<"Error Loading Data..."<<std::endl;
+        std::println("Error Loading Data...");
         return;
     }
     file>> nextID;
@@ -376,23 +366,23 @@ void Library::loadData(){
     }
     file.close();
 }
+
 void Library::resetData(){
     if (books.empty()){
-        std::cout<<"The Inventory Is Empty"<<std::endl;
+        std::println("The Inventory Is Empty");
         return;
     }
     char choice;
     input(choice,"Are You Sure You Want To Reset Your Data? This Action Can't Be Undone!!!(Y/n):");
     if (choice =='Y' || choice=='y'){
         std::ofstream file(getSavePath());
-
         if(!file.is_open()){
-            std::cout<<"Error Resetting The File..."<<std::endl;
+            std::println("Error Resetting The File...");
             return;
         }
         books.clear();
         nextID=1;
-        std::cout<<"Data Reset Successfully !" <<std::endl;
+        std::println("Data Reset Successfully !");
         Sleep(1000);
         file.close();
     }

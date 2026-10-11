@@ -1,4 +1,5 @@
 #pragma once
+#include <print>
 #include <iostream>
 #include <limits>
 #include <cstdlib>
@@ -12,7 +13,7 @@ bool exitMenu();
 template <typename T>
 void input(T& var, const std::string& prompt){
     while(true){
-        std::cout<<prompt;
+        std::print("{}",prompt);
         std::cin>>var;
         if(std::cin.fail()){
             printErr();
