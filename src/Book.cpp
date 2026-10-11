@@ -46,12 +46,14 @@ Book::Book(
                 quantity(quantity){}
 
 void Book::printBook() const{
-    std::println();
-    std::println("ID: #{}",id);
-    std::println("Title: {}",title);
-    std::println("Author: {}",author);
-    std::println("Price: ${}",price);
-    std::println("Quantity: {}",quantity);
-    std::println("Availability: {}",(quantity>0 ? "Available" : "Not Available"));
-    std::println("\n=====================================\n");
+    std::println("");
+    std::println("ID:# {}", id);
+    std::println("Title:{}", title);
+    std::println("Author:{}", author);
+    std::println("Price:{}", price);
+    std::println("Quantity:{}", quantity);
+    std::println("Availability:{}", quantity > 0 ? "Available" : "UnAvailable");
+    std::println("");
+    std::println("=====================================");
+    std::println("");
 }
